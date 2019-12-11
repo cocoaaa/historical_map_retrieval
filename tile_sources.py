@@ -28,7 +28,7 @@ EsriOceanReference = 'https://server.arcgisonline.com/ArcGIS/rest/services/Ocean
 OSM = 'https://c.tile.openstreetmap.org/{Z}/{X}/{Y}.png'
 Wikipedia = 'https://maps.wikimedia.org/osm-intl/{Z}/{X}/{Y}@2x.png'
 NLS = "https://nls-1.tileserver.com/5eF1a699E49r/{Z}/{X}/{Y}.jpg"
-# NLS = "http://nls-3.tileserver.com/nls/{Z}/{X}/{Y}.jpg"
+# NLS = "http://nlcas-3.tileserver.com/nls/{Z}/{X}/{Y}.jpg"
 
 
 tile_sources = {k: v for k, v in locals().items() if isinstance(v, str) and not k.startswith('__')}

@@ -172,13 +172,15 @@ def download_tiles_from_cities(locations_fn: str, tile_source_name:str, styles: 
         print('=' * 80)
         print('Started ', city)
         for style in tqdm.tqdm(styles, desc=f'style-loop'):
-            out_dir = Path(out_dir_root) / city / style
-            out_dir = makedir(out_dir)
+
 
             print('Started style: ', city, style)
             ts_name = f'{tile_source_name}{snake2camel(style)}'
             url_base = ts.tile_sources[ts_name]
             print(f'style: {ts_name}, \nurl_base: {url_base}')
+
+            out_dir = Path(out_dir_root) / city / ts_name
+            out_dir = makedir(out_dir)
             download_tiles_by_lnglat(out_dir, url_base, xmin, xmax, ymin, ymax, z)
             print(f'Done {style}\n')
         print(f'Done {city}\n\n')
@@ -279,7 +281,7 @@ if __name__ == "__main__":
         download_esri_styles(bbox_json, styles, out_dir)
 
     elif tile_server == 'carto':
-        styles = ['dark', 'light']
+        styles = ['light']#['dark', 'light']
         download_carto_styles(bbox_json, styles, out_dir)
 
     elif tile_server == 'osm':
