@@ -14,8 +14,8 @@ import tqdm
 from PIL import Image
 
 from tileGeoTransfer import *  # getTileFromGeo & getGeoFromTile
-from maptile_urls import get_stamen_url
-from utils import makedir
+import tile_sources as ts
+from utils import makedir, snake2camel
 
 
 def checkBlankImg_ggl(filename):
@@ -129,20 +129,20 @@ def getImgFromUrl(out_dir: Union[str, Path], url: str, x, y, z):
         print("Fail: ", x, y, z)
 
 
-def downlod_tiles_by_xyz(out_dir: Union[str, Path], url_base_fn: Callable,
+def downlod_tiles_by_xyz(out_dir: Union[str, Path], url_base: str,
                          x_start, x_end, y_start, y_end, z):
     out_dir = makedir(out_dir)
 
     for x in range(x_start, x_end + 1):
         for y in range(y_start, y_end + 1):
             print(x, y)
-            url_tile = url_base_fn(x=x, y=y, z=z)
+            url_tile = url_base.format(X=x, Y=y, Z=z)
             getImgFromUrl(out_dir, url_tile, x, y, z)
             time.sleep(0.005)
 
 
-def download_bbox(out_dir: Union[str, Path], url_base_fn: Callable,
-                  start_long, end_long, start_lat, end_lat, zoom):
+def download_tiles_by_lnglat(out_dir: Union[str, Path], url_base: str,
+                             start_long, end_long, start_lat, end_lat, zoom):
     x0, y0, z = getTileFromGeo(start_lat, start_long, zoom)
     x1, y1, z = getTileFromGeo(start_lat, end_long, zoom)
     x2, y2, z = getTileFromGeo(end_lat, start_long, zoom)
@@ -154,14 +154,14 @@ def download_bbox(out_dir: Union[str, Path], url_base_fn: Callable,
     end_y = max(y0, y1, y2, y3)
 
     print('Downloading...', start_x, end_x, start_y, end_y)
-    downlod_tiles_by_xyz(out_dir, url_base_fn, start_x, end_x, start_y, end_y, z)
+    downlod_tiles_by_xyz(out_dir, url_base, start_x, end_x, start_y, end_y, z)
 
 
-def download_stamen(locations_fn: str, styles: Iterable[str], out_dir_root: str):
+def download_stamen_styles(locations_fn: str, styles: Iterable[str], out_dir_root: Union[str,Path]):
     """
 	styles = ['toner', 'terrain', 'watercolor']
 
-	:param locations_fn:
+	:param locations_fn: path to the json file with city_name:bbox_dictionary
 	:param styles:
 	:param out_dir_root:
 	:return:
@@ -184,8 +184,10 @@ def download_stamen(locations_fn: str, styles: Iterable[str], out_dir_root: str)
             out_dir = makedir(out_dir)
 
             print('Started style: ', city, style)
-            url_base_fn = partial(get_stamen_url, style=style)
-            # download_bbox(out_dir, url_base_fn, xmin, xmax, ymin, ymax, z)
+            ts_name = f'Stamen{snake2camel(style)}'
+            url_base = ts.tile_sources[ts_name]
+            print(f'style: {ts_name}, \nurl_base: {url_base}')
+            download_tiles_by_lnglat(out_dir, url_base, xmin, xmax, ymin, ymax, z)
             print(f'Done {style}\n')
         print(f'Done {city}\n\n')
 
@@ -201,11 +203,11 @@ def download_nls(locations_fn: str, out_dir_root: str):
 if __name__ == "__main__":
     # Argument parser
     parser = argparse.ArgumentParser()
-    parser.add_argument("bbox_json", help="relative or absolute path to a json file "
-                                          "with cityname:bbox in lat,lng", type=str)
-    parser.add_argument("tile_server", help="name of the tile server. Must be one "
-                                            "of stamen, os, nls", type=str)
-    parser.add_argument("-o", "--out", help="path to the output root folder",
+    parser.add_argument("bbox_json", type=str,
+                        help="Path to a json file with cityname:bbox in lat,lng")
+    parser.add_argument("-ts", "--tile-server", required=True, type=str,
+                        help="name of the tile server. Options: stamen, os, nls")
+    parser.add_argument("-o", "--out", help="Path to the output root folder. Default: ./tmp",
                         type=str, default='./tmp')
 
     args = parser.parse_args()
@@ -215,7 +217,7 @@ if __name__ == "__main__":
 
     # Handle downloading from the specified tile server
     if tile_server == 'stamen':
-        styles = ['toner', 'terrain', 'watercolor']
-        download_stamen(bbox_json, styles, out_dir)
+        styles = ['toner_background', 'terrain', 'watercolor']
+        download_stamen_styles(bbox_json, styles, out_dir)
 
 # xmin, xmax, ymin, ymax = 52.0100, 52.0500, -1.0000, -0.9500
