@@ -14,3 +14,6 @@ def makedir(dirpath: Union[str, Path], parents=True, exist_ok=True, verbose=True
             print('Created: ', dirpath)
         return dirpath
 
+def snake2camel(s):
+    "Convert snake_case to CamelCase"
+    return ''.join(s.title().split('_'))
