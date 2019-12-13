@@ -48,6 +48,7 @@ runs/
 ### temp files or swp file ###
 *.swp
 temp/
+tmp/
 cache/
 backup/
 *.pkl
