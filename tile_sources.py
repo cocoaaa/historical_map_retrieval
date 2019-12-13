@@ -1,19 +1,33 @@
 # Slim version Geoviews tile_sources.py
 # Source: https://tinyurl.com/wznug9m
-
+from typing import List
+from abc import ABC, abstractmethod
 # CartoDB basemaps
+# Options: light_all, light_all_lowercase, light_nolabels, light_only_labels, similarly for Dark
 CartoDark = 'https://cartodb-basemaps-4.global.ssl.fastly.net/dark_all/{Z}/{X}/{Y}.png'
-CartoEco = 'http://3.api.cartocdn.com/base-eco/{Z}/{X}/{Y}.png'
+CartoDarkNoLabels = 'https://cartodb-basemaps-4.global.ssl.fastly.net/dark_nolabels/{Z}/{X}/{Y}.png'
+
 CartoLight = 'https://cartodb-basemaps-4.global.ssl.fastly.net/light_all/{Z}/{X}/{Y}.png'
+CartoLightNoLabels = 'https://cartodb-basemaps-4.global.ssl.fastly.net/light_nolabels/{Z}/{X}/{Y}.png'
+
 CartoMidnight = 'http://3.api.cartocdn.com/base-midnight/{Z}/{X}/{Y}.png'
+CartoEco = 'http://3.api.cartocdn.com/base-eco/{Z}/{X}/{Y}.png'
+
 
 # Stamen basemaps
 StamenTerrain = 'http://tile.stamen.com/terrain/{Z}/{X}/{Y}.png'
 StamenTerrainRetina = 'http://tile.stamen.com/terrain/{Z}/{X}/{Y}@2x.png'
+StamenTerrainLines = 'http://tile.stamen.com/terrain-lines/{Z}/{X}/{Y}.png'
+StamenTerrainBackground = 'http://tile.stamen.com/terrain-background/{Z}/{X}/{Y}.png'
+
 StamenWatercolor = 'http://tile.stamen.com/watercolor/{Z}/{X}/{Y}.jpg'
+
 StamenToner = 'http://tile.stamen.com/toner/{Z}/{X}/{Y}.png'
+StamenTonerLines = 'http://tile.stamen.com/toner-lines/{Z}/{X}/{Y}.png'
 StamenTonerBackground = 'http://tile.stamen.com/toner-background/{Z}/{X}/{Y}.png'
+
 StamenLabels = 'http://tile.stamen.com/toner-labels/{Z}/{X}/{Y}.png'
+
 
 # Esri maps (see https://server.arcgisonline.com/arcgis/rest/services for the full list)
 EsriImagery = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{Z}/{Y}/{X}.jpg'
@@ -32,4 +46,43 @@ NLS = "https://nls-1.tileserver.com/5eF1a699E49r/{Z}/{X}/{Y}.jpg"
 
 
 tile_sources = {k: v for k, v in locals().items() if isinstance(v, str) and not k.startswith('__')}
+
+## todo: put them into class
+class TileSource(ABC):
+    name = None
+    styles = None
+    @classmethod
+    @abstractmethod
+    def check_styles(cls, styles: List[str]):
+        "Check if all styles in the list `styles` are proper styles for the tile source"
+        pass
+
+
+class Stamen(TileSource):
+    name = 'Stamen'
+    styles = ['toner', 'toner_background', 'toner_lines',
+              'terrain', 'terrain_background', 'terrain_lines',
+              'watercolor',
+              'labels']
+
+    # todo: urls
+    # terrain = 'http://...'
+
+
+class Esri(TileSource):
+    styles = ['imagery', 'nat_geo', 'terrain', 'reference', 'ocean_base', 'ocean_reference' ]
+    name = 'Esri'
+
+
+class Carto(TileSource):
+    name = 'Carto'
+    styles = ['dark', 'dark_no_labels', 'light', 'light_no_labels', 'eco', 'midnight']
+
+
+class OSM(TileSource):
+    name = 'OSM'
+
+
+class NLS(TileSource):
+    name = 'NLS'
 
