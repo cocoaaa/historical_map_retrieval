@@ -81,17 +81,19 @@ def store_4Geo_Boundary(lnglat_path: str, x, y, z):
 
 def getImgFromUrl(out_dir: Union[str, Path], url: str, x, y, z):
     checkBlankImg_fn = checkBlankImg_nls if 'nls' in url else checkBlankImg_ggl
+    lat, lng = getGeoFromTile(x, y, z) # for error messages
+
     req = ur.Request(url)
     try:
         urlobj = ur.urlopen(req)
     except URLError as e:
         if hasattr(e, 'reason'):
-            print('We failed to reach a server.')
+            print(f'We failed to reach a server: {url}')
             print('Reason: ', e.reason)
         elif hasattr(e, 'code'):
             print('The server couldn\'t fulfill the request.')
             print('Error code: ', e.code)
-        print("F", x, y, z)
+        print("Failed at lng, lat (x,y,z):  {lng, lat, (x, y, z)}")
         return
 
     out_dir = makedir(out_dir)
@@ -102,19 +104,19 @@ def getImgFromUrl(out_dir: Union[str, Path], url: str, x, y, z):
             ur.urlretrieve(url, str(out_fn))
         except URLError as e:
             if hasattr(e, 'reason'):
-                print('We failed to reach a server.')
+                print(f'We failed to reach a server: {url}')
                 print('Reason: ', e.reason)
             elif hasattr(e, 'code'):
                 print('The server couldn\'t fulfill the request.')
                 print('Error code: ', e.code)
-            print("F", x, y, z)
+            print("Failed at lng, lat (x,y,z):  {lng, lat, (x, y, z)}")
             return
 
         # Check if the image is blank, i.e: sea, plain grass
         if checkBlankImg_fn(out_fn):  # or checkBlankImg_ggl(out_fn):
             if out_fn.exists():
                 out_fn.unlink()
-                print("Deleted: ", x, y, z)
+                print("Deleted lng, lat (x,y,z):  {lng, lat, (x, y, z)}")
             else:
                 print(out_fn, " does not exist. Nothing to do.")
         else:
@@ -127,7 +129,7 @@ def getImgFromUrl(out_dir: Union[str, Path], url: str, x, y, z):
 
             print("Success: ", x, y, z, getGeoFromTile(x, y, z))
     else:
-        print("Fail: ", x, y, z)
+        print("Failed at lng, lat (x,y,z):  {lng, lat, (x, y, z)}")
 
 
 def downlod_tiles_by_xyz(out_dir: Union[str, Path], url_base: str,
@@ -181,14 +183,14 @@ def download_tiles_from_cities(locations_fn: str, tile_source_name:str, styles: 
 
             out_dir = Path(out_dir_root) / city / ts_name
             out_dir = makedir(out_dir)
-            download_tiles_by_lnglat(out_dir, url_base, xmin, xmax, ymin, ymax, z)
+            # download_tiles_by_lnglat(out_dir, url_base, xmin, xmax, ymin, ymax, z)
             print(f'Done {style}\n')
         print(f'Done {city}\n\n')
 
 
 def download_stamen_styles(locations_fn: str, styles: Iterable[str], out_dir_root: Union[str,Path]):
     """
-	styles = ['toner', 'toner_background', 'terrain', 'watercolor']
+	styles = ['toner', 'toner_background', 'toner_lines', 'terrain', 'terrain_lines', 'watercolor']
 
 	:param locations_fn: path to the json file with city_name:bbox_dictionary
 	:param styles:
@@ -196,21 +198,22 @@ def download_stamen_styles(locations_fn: str, styles: Iterable[str], out_dir_roo
 	:return:
 	"""
     for style in styles:
-        assert style.lower() in ['toner', 'toner_background', 'terrain', 'watercolor'], f'{style} is not a valid style name'
-    tile_source_name = 'Stamen'
+        assert style.lower() in  ts.Stamen.styles, f'{style} is not a valid style name'
+
+    tile_source_name = ts.Stamen.name
     download_tiles_from_cities(locations_fn, tile_source_name, styles, out_dir_root)
 
 
 def download_esri_styles(locations_fn: str, styles: Iterable[str], out_dir_root: Union[str,Path]):
     for style in styles:
-        assert style.lower() in ['imagery', 'nat_geo', 'terrain', 'reference', 'ocean_base', 'ocean_reference' ], f'{style} is not a valid style name'
-    tile_source_name = 'Esri'
+        assert style.lower() in ts.Esri.styles, f'{style} is not a valid style name'
+    tile_source_name = ts.Esri.name
     download_tiles_from_cities(locations_fn, tile_source_name, styles, out_dir_root)
 
 def download_carto_styles(locations_fn: str, styles: Iterable[str], out_dir_root: Union[str,Path]):
     for style in styles:
-        assert style.lower() in ['dark', 'light', 'eco', 'midnight'], f'{style} is not a valid style name'
-    tile_source_name = 'Carto'
+        assert style.lower() in ts.Carto.styles, f'{style} is not a valid style name'
+    tile_source_name = ts.Carto.name
     download_tiles_from_cities(locations_fn, tile_source_name, styles, out_dir_root)
 
 def download_osm(locations_fn: str, out_dir_root: str):
@@ -231,7 +234,7 @@ def download_osm(locations_fn: str, out_dir_root: str):
         out_dir = Path(out_dir_root) / city
         out_dir = makedir(out_dir)
 
-        url_base = ts.tile_sources['OSM']
+        url_base = ts.tile_sources[ts.OSM.name]
         download_tiles_by_lnglat(out_dir, url_base, xmin, xmax, ymin, ymax, z)
         print(f'Done {city}\n\n')
 
@@ -251,7 +254,7 @@ def download_nls(locations_fn: str, out_dir_root: str, z=16):
         out_dir = Path(out_dir_root) / city
         out_dir = makedir(out_dir)
 
-        url_base = ts.tile_sources['NLS']
+        url_base = ts.tile_sources[ts.NLS.name]
         download_tiles_by_lnglat(out_dir, url_base, xmin, xmax, ymin, ymax, z)
         print(f'Done {city}\n\n')
 
@@ -260,28 +263,32 @@ if __name__ == "__main__":
     # Argument parser
     parser = argparse.ArgumentParser()
     parser.add_argument("bbox_json", type=str,
-                        help="Path to a json file with cityname:bbox in lat,lng")
+                        help="<Required> Path to a json file with cityname:bbox in lat,lng")
     parser.add_argument("-ts", "--tile-server", required=True, type=str,
-                        help="name of the tile server. Options: stamen, esri, carto, osm, nls")
-    parser.add_argument("-o", "--out", help="Path to the output root folder. Default: ./tmp",
+                        help="<Required> Name of the tile server. Options: stamen, esri, carto, osm, nls")
+    parser.add_argument("-s", "--styles", nargs='+', type=str,
+                        help='<Required> Name of the styles to fetch from the tile server')
+    parser.add_argument("-o", "--out", help="<Optional> Path to the output root folder. Default: ./tmp",
                         type=str, default='./tmp')
 
     args = parser.parse_args()
     bbox_json = args.bbox_json
     tile_server = args.tile_server
+    styles = args.styles
     out_dir = args.out
 
+    print('styles: ', styles)
     # Handle downloading from the specified tile server
     if tile_server == 'stamen':
-        styles = ['toner_background', 'terrain', 'watercolor']
+        styles = styles or ['toner_background', 'terrain_background', 'watercolor']
         download_stamen_styles(bbox_json, styles, out_dir)
 
     elif tile_server == 'esri':
-        styles = ['imagery']#, 'nat_geo', 'terrain']
+        styles = styles or ['imagery']#, 'nat_geo', 'terrain']
         download_esri_styles(bbox_json, styles, out_dir)
 
     elif tile_server == 'carto':
-        styles = ['light']#['dark', 'light']
+        styles = styles or ['light_no_labels']#['dark', 'light']
         download_carto_styles(bbox_json, styles, out_dir)
 
     elif tile_server == 'osm':
