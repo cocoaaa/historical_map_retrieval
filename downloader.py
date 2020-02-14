@@ -132,8 +132,8 @@ def getImgFromUrl(out_dir: Union[str, Path], url: str, x, y, z):
         print("Failed at lng, lat (x,y,z):  {lng, lat, (x, y, z)}")
 
 
-def downlod_tiles_by_xyz(out_dir: Union[str, Path], url_base: str,
-                         x_start, x_end, y_start, y_end, z):
+def download_tiles_by_xyz(out_dir: Union[str, Path], url_base: str,
+                          x_start, x_end, y_start, y_end, z):
     out_dir = makedir(out_dir)
 
     for x in range(x_start, x_end + 1):
@@ -156,7 +156,7 @@ def download_tiles_by_lnglat(out_dir: Union[str, Path], url_base: str,
     end_y = max(y0, y1, y2, y3)
 
     print('Downloading...', start_x, end_x, start_y, end_y)
-    downlod_tiles_by_xyz(out_dir, url_base, start_x, end_x, start_y, end_y, z)
+    download_tiles_by_xyz(out_dir, url_base, start_x, end_x, start_y, end_y, z)
 
 def download_tiles_from_cities(locations_fn: str, tile_source_name:str, styles: Iterable[str], out_dir_root: Union[str,Path]):
     out_dir_root = makedir(out_dir_root)
@@ -174,8 +174,6 @@ def download_tiles_from_cities(locations_fn: str, tile_source_name:str, styles: 
         print('=' * 80)
         print('Started ', city)
         for style in tqdm.tqdm(styles, desc=f'style-loop'):
-
-
             print('Started style: ', city, style)
             ts_name = f'{tile_source_name}{snake2camel(style)}'
             url_base = ts.tile_sources[ts_name]
@@ -187,6 +185,35 @@ def download_tiles_from_cities(locations_fn: str, tile_source_name:str, styles: 
             print(f'Done {style}\n')
         print(f'Done {city}\n\n')
 
+def download_styles_xyz(x:int, y:int, z:int,
+                        tile_source_name:str,
+                        styles: Iterable[str],
+                        out_dir_root: Union[str, Path]):
+    """
+	styles = ['toner', 'toner_background', 'toner_lines', 'terrain', 'terrain_lines', 'watercolor']
+
+	:param x,y,z: map tile index x,y,z
+	:param tile_source: name of the tile source, eg. Stamen, Carto, Esri, OSM
+	:param styles:
+	:param out_dir_root: Path to the directory root to save the downloaded images
+	:return:
+	"""
+    out_dir_root = makedir(out_dir_root)
+    tile_source_name = tile_source_name.capitalize()
+    tile_source = getattr(ts, tile_source_name)
+
+    if len(styles) and styles[0].lower() == 'all':
+        styles = tile_source.styles
+    print ("styles: ", styles) #delete
+
+    for style in styles:
+        assert style.lower() in  tile_source.styles, f'{style} is not a valid style name'
+        ts_name = f'{tile_source_name}{snake2camel(style)}'
+        url_base = getattr(ts, ts_name)
+        url_tile = url_base.format(X=x, Y=y, Z=z)
+        out_dir = out_dir_root/ts_name
+        print(f'Downloading maptile...  {ts_name}: url_tile: {url_tile}')
+        getImgFromUrl(out_dir, url_tile, x, y, z)
 
 def download_stamen_styles(locations_fn: str, styles: Iterable[str], out_dir_root: Union[str,Path]):
     """
