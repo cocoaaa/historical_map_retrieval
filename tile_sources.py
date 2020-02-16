@@ -10,6 +10,8 @@ CartoDarkNoLabels = 'https://cartodb-basemaps-4.global.ssl.fastly.net/dark_nolab
 CartoLight = 'https://cartodb-basemaps-4.global.ssl.fastly.net/light_all/{Z}/{X}/{Y}.png'
 CartoLightNoLabels = 'https://cartodb-basemaps-4.global.ssl.fastly.net/light_nolabels/{Z}/{X}/{Y}.png'
 
+CartoVoyagerNoLabels = 'https://cartodb-basemaps-4.global.ssl.fastly.net/rastertiles/voyager_nolabels/{Z}/{X}/{Y}.png'
+
 CartoMidnight = 'http://3.api.cartocdn.com/base-midnight/{Z}/{X}/{Y}.png'
 CartoEco = 'http://3.api.cartocdn.com/base-eco/{Z}/{X}/{Y}.png'
 
@@ -32,6 +34,7 @@ StamenLabels = 'http://tile.stamen.com/toner-labels/{Z}/{X}/{Y}.png'
 # Esri maps (see https://server.arcgisonline.com/arcgis/rest/services for the full list)
 EsriImagery = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{Z}/{Y}/{X}.jpg'
 EsriNatGeo = 'https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{Z}/{Y}/{X}'
+EsriWorldTopo = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{Z}/{Y}/{X}'
 EsriUSATopo = 'https://server.arcgisonline.com/ArcGIS/rest/services/USA_Topo_Maps/MapServer/tile/{Z}/{Y}/{X}'
 EsriTerrain = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{Z}/{Y}/{X}'
 EsriReference = 'https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Reference_Overlay/MapServer/tile/{Z}/{Y}/{X}'
@@ -39,11 +42,11 @@ EsriOceanBase = 'https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/Worl
 EsriOceanReference = 'https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Reference/MapServer/tile/{Z}/{Y}/{X}'
 
 # Miscellaneous
-OSM = 'https://c.tile.openstreetmap.org/{Z}/{X}/{Y}.png'
+OSMDefault = 'https://c.tile.openstreetmap.org/{Z}/{X}/{Y}.png'
 Wikipedia = 'https://maps.wikimedia.org/osm-intl/{Z}/{X}/{Y}@2x.png'
-NLS = "https://nls-1.tileserver.com/5eF1a699E49r/{Z}/{X}/{Y}.jpg"
+NLSDefault = "https://nls-1.tileserver.com/5eF1a699E49r/{Z}/{X}/{Y}.jpg"
 # NLS = "http://nlcas-3.tileserver.com/nls/{Z}/{X}/{Y}.jpg"
-
+MtbmapDefault = 'http://tile.mtbmap.cz/mtbmap_tiles/{Z}/{X}/{Y}.png'
 
 tile_sources = {k: v for k, v in locals().items() if isinstance(v, str) and not k.startswith('__')}
 
@@ -70,19 +73,26 @@ class Stamen(TileSource):
 
 
 class Esri(TileSource):
-    styles = ['imagery', 'nat_geo', 'terrain', 'reference', 'ocean_base', 'ocean_reference' ]
+    styles = ['imagery', 'nat_geo', 'world_topo', 'usa_topo', 'terrain', 'reference', 'ocean_base', 'ocean_reference' ]
     name = 'Esri'
 
 
 class Carto(TileSource):
     name = 'Carto'
-    styles = ['dark', 'dark_no_labels', 'light', 'light_no_labels', 'eco', 'midnight']
+    styles = ['dark', 'dark_no_labels', 'light', 'light_no_labels', 'voyager_no_labels', 'eco', 'midnight']
 
 
 class OSM(TileSource):
     name = 'OSM'
+    styles = ['default']
+
 
 
 class NLS(TileSource):
     name = 'NLS'
+    styles = ['default']
+
+class Mtbmap(TileSource):
+    name = 'Mtbmap'
+    styles = ['default']
 
