@@ -4,6 +4,14 @@ import argparse
 import pdb
 
 if __name__ == "__main__":
+    """ 
+    Example Usage:
+    ```bash
+    python download_styles.py -b "./locations/paris.json" -s "./selected_styles.json" -o "./temp"
+    or, 
+    nohup python download_styles.py -b "./locations/vegas.json" -s "./selected_styles.js
+on" -o "/data/hayley/maptiles"
+    """
     # Argument parser
     parser = argparse.ArgumentParser()
     parser.add_argument("-b","--bboxes", required=True, type=str,
