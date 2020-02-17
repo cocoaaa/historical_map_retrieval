@@ -26,8 +26,6 @@ on" -o "/data/hayley/maptiles"
     styles_json = args.styles
     out_dir_root = args.out
 
-    pdb.set_trace()
-
     # Download maptiles for the bboxes specified in `bbox_json` file, with the styles specified in `selction_json` file
     # and save images to `{out_dir_root}/{city}/{style}` folders
 
