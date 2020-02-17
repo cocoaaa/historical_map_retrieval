@@ -1,0 +1,6 @@
+{
+  "Carto": ["light_no_labels", "voyager_no_labels"],
+  "Stamen": ["toner_background", "terrain_lines", "terrain_background", "watercolor"],
+  "OSM": ["default"],
+  "Mtbmap": ["default"]
+}
