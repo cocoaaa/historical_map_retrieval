@@ -9,8 +9,7 @@ if __name__ == "__main__":
     ```bash
     python download_styles.py -b "./locations/paris.json" -s "./selected_styles.json" -o "./temp"
     or, 
-    nohup python download_styles.py -b "./locations/vegas.json" -s "./selected_styles.js
-on" -o "/data/hayley/maptiles"
+    nohup python download_styles.py -b "./locations/vegas.json" -s "./selected_styles.json" -o "/data/hayley/maptiles"
     """
     # Argument parser
     parser = argparse.ArgumentParser()
