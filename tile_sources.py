@@ -41,8 +41,13 @@ EsriReference = 'https://server.arcgisonline.com/ArcGIS/rest/services/Reference/
 EsriOceanBase = 'https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{Z}/{Y}/{X}'
 EsriOceanReference = 'https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Reference/MapServer/tile/{Z}/{Y}/{X}'
 
+
+# Geoportail France
+GeoportailParcels = 'https://wxs.ign.fr/choisirgeoportail/geoportail/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&STYLE=bdparcellaire&TILEMATRIXSET=PM&FORMAT=image/png&LAYER=CADASTRALPARCELS.PARCELS&TILEMATRIX={Z}&TILEROW={Y}&TILECOL={X}'
+
+
 # Miscellaneous
-OSMDefault = 'https://c.tile.openstreetmap.org/{Z}/{X}/{Y}.png'
+OSMDefault = 'https://tiles.wmflabs.org/osm-no-labels/{Z}/{X}/{Y}.png' #'https://c.tile.openstreetmap.org/{Z}/{X}/{Y}.png'
 Wikipedia = 'https://maps.wikimedia.org/osm-intl/{Z}/{X}/{Y}@2x.png'
 NLSDefault = "https://nls-1.tileserver.com/5eF1a699E49r/{Z}/{X}/{Y}.jpg"
 # NLS = "http://nlcas-3.tileserver.com/nls/{Z}/{X}/{Y}.jpg"
