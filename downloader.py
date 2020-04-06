@@ -175,7 +175,7 @@ def download_tiles_from_cities(locations_fn: str, tile_source_name: str, styles:
         # if city in ['paris', 'khartoum']:
         #     continue
         xmin, xmax, ymin, ymax, z = geo['xmin'], geo['xmax'], geo['ymin'], geo['ymax'], geo['z']
-        pdb.set_trace()
+        # pdb.set_trace()
         # z = geo.get('z', 15)
 
         print('=' * 80)
