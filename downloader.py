@@ -164,7 +164,7 @@ def download_tiles_by_lnglat(out_dir: Union[str, Path], url_base: str,
 
 
 def download_tiles_from_cities(locations_fn: str, tile_source_name: str, styles: Iterable[str],
-                               out_dir_root: Union[str, Path]):
+                               out_dir_root: Union[str, Path], overwrites=None):
     out_dir_root = makedir(out_dir_root)
 
     with open(locations_fn) as f:
@@ -175,8 +175,10 @@ def download_tiles_from_cities(locations_fn: str, tile_source_name: str, styles:
         # if city in ['paris', 'khartoum']:
         #     continue
         xmin, xmax, ymin, ymax, z = geo['xmin'], geo['xmax'], geo['ymin'], geo['ymax'], geo['z']
+        if overwrites is not None:
+            z = overwrites["z"]
+            print(f"Overwriting z {geo['z']} -> {z}")
         # pdb.set_trace()
-        # z = geo.get('z', 15)
 
         print('=' * 80)
         print('Started ', city)
@@ -352,13 +354,14 @@ def download_mtbmap_styles(locations_fn: str, styles: Iterable[str], out_dir_roo
 #     download_tiles_from_cities(locations_fn, tile_source_name, styles, out_dir_root)
 
 
-def download_selected_styles(locations_fn: str, selection_fn: str, out_dir_root: Union[str, Path]):
+def download_selected_styles(locations_fn: str, selection_fn: str, out_dir_root: Union[str, Path],
+                             overwrites=None):
 
     with open(selection_fn) as f:
         selection = json.load(f)
     for ts_class_name, styles in selection.items():
         ts_name = getattr(getattr(ts, ts_class_name), 'name')
-        download_tiles_from_cities(locations_fn, ts_name, styles, out_dir_root)
+        download_tiles_from_cities(locations_fn, ts_name, styles, out_dir_root, overwrites=overwrites)
 
 
 if __name__ == "__main__":
