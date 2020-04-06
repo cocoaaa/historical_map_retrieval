@@ -11,11 +11,14 @@ from pathlib import Path
 import time
 from decimal import Decimal
 import tqdm
+import pdb
+
 from PIL import Image
 
 from tileGeoTransfer import *  # getTileFromGeo & getGeoFromTile
 import tile_sources as ts
 from utils import makedir, snake2camel
+
 
 
 def checkBlankImg_ggl(filename):
@@ -171,8 +174,9 @@ def download_tiles_from_cities(locations_fn: str, tile_source_name: str, styles:
     for city, geo in tqdm.tqdm(city_geos.items(), desc='city-loop'):
         # if city in ['paris', 'khartoum']:
         #     continue
-        xmin, xmax, ymin, ymax = geo['xmin'], geo['xmax'], geo['ymin'], geo['ymax']
-        z = geo.get('z', 15)
+        xmin, xmax, ymin, ymax, z = geo['xmin'], geo['xmax'], geo['ymin'], geo['ymax'], geo['z']
+        pdb.set_trace()
+        # z = geo.get('z', 15)
 
         print('=' * 80)
         print('Started ', city)

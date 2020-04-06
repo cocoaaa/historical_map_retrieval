@@ -9,7 +9,15 @@ if __name__ == "__main__":
     ```bash
     python download_styles.py -b "./locations/paris.json" -s "./selected_styles.json" -o "./temp"
     or, 
+    
+    On Remote server (eg. arya)
+    1. Change to a proper conda env
+    conda activate geo_env
+    2. Run the download script
     nohup python download_styles.py -b "./locations/vegas.json" -s "./selected_styles.json" -o "/data/hayley/maptiles"
+    or, 
+    nohup python download_styles.py -b "./locations/locations.json" -s "./styles/osm_styles.json" -o "/data/hayley/maptiles"
+
     """
     # Argument parser
     parser = argparse.ArgumentParser()
