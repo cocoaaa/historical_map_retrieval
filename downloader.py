@@ -186,7 +186,7 @@ def download_tiles_from_cities(locations_fn: str, tile_source_name: str, styles:
             url_base = ts.tile_sources[ts_name]
             print(f'style: {ts_name}, \nurl_base: {url_base}')
 
-            out_dir = Path(out_dir_root) / city / ts_name
+            out_dir = Path(out_dir_root) / city / ts_name / str(z)
             out_dir = makedir(out_dir)
             download_tiles_by_lnglat(out_dir, url_base, xmin, xmax, ymin, ymax, z)
             print(f'Done {style}\n')
