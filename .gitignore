@@ -58,3 +58,6 @@ backup/
 
 # nohup output
 nohup.out
+
+# Large image folder
+zoom_samples
