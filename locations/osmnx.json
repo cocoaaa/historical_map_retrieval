@@ -1,132 +1,137 @@
 {
 
-  "la": {"xmin": -118.5266,
-        "ymin": 33.8858,
-        "xmax": -117.9876,
-        "ymax": 34.1567,
-        "z":  14},
+  "la": {"area_m": 1595581267.7142398,
+ "name": "Los Angeles, Los Angeles County, California, United States of America",
+ "xmax": -118.155398,
+ "xmin": -118.6676334,
+ "ymax": 34.3350353,
+ "ymin": 33.8494973},
 
 
   "vegas": {
-    'name': 'Las Vegas, Clark County, Nevada, United States of America',
-    'area_m': 457877863.23560387,
-    'xmax': -115.0621786,
-    'xmin': -115.3777489,
-    'ymax': 36.3359959,
-    'ymin': 36.1295895
+    "name": "Las Vegas, Clark County, Nevada, United States of America",
+    "area_m": 457877863.23560387,
+    "xmax": -115.0621786,
+    "xmin": -115.3777489,
+    "ymax": 36.3359959,
+    "ymin": 36.1295895
   },
 
 
   "charlotte": {
-  'name': 'Charlotte, Mecklenburg County, North Carolina, United States of America',
-    'area_m': 1006599932.6032761,
- 'xmax': -80.6701329,
- 'xmin': -81.008391,
- 'ymax': 35.3922365,
- 'ymin': 35.0153162
+  "name": "Charlotte, Mecklenburg County, North Carolina, United States of America",
+    "area_m": 1006599932.6032761,
+ "xmax": -80.6701329,
+ "xmin": -81.008391,
+ "ymax": 35.3922365,
+ "ymin": 35.0153162
 
   },
 
   "chicago": {
-'name': 'Chicago, Cook County, Illinois, United States of America',
- 'xmin': -87.855433,
- 'ymin': 41.6459001,
- 'xmax': -87.5245029,
- 'ymax': 42.0227242,
- 'area_m': 754906349.5319687
+"name": "Chicago, Cook County, Illinois, United States of America",
+ "xmin": -87.855433,
+ "ymin": 41.6459001,
+ "xmax": -87.5245029,
+ "ymax": 42.0227242,
+ "area_m": 754906349.5319687
   },
 
 
   "manhattan": {
-'area_m': 77003120.59389,
- 'name': 'Manhattan, New York County, New York, United States of America',
- 'xmax': -73.9062697,
- 'xmin': -74.0180549,
- 'ymax': 40.878979,
- 'ymin': 40.7014943
+"area_m": 77003120.59389,
+ "name": "Manhattan, New York County, New York, United States of America",
+ "xmax": -73.9062697,
+ "xmin": -74.0180549,
+ "ymax": 40.878979,
+ "ymin": 40.7014943
   },
 
 
   "boston": {
-'area_m': 180512020.08779275,
- 'name': 'Boston, Suffolk County, Massachusetts, United States of America',
- 'xmax': -70.995568,
- 'xmin': -71.181895,
- 'ymax': 42.3946751,
- 'ymin': 42.2313976}
+"area_m": 180512020.08779275,
+ "name": "Boston, Suffolk County, Massachusetts, United States of America",
+ "xmax": -70.995568,
+ "xmin": -71.181895,
+ "ymax": 42.3946751,
+ "ymin": 42.2313976}
   },
 
 
   "seoul": {
-'area_m': 725044498.8447367,
- 'name': 'Seoul, South Korea',
- 'xmax': 127.1828552,
- 'xmin': 126.7904879,
- 'ymax': 37.6911425,
- 'ymin': 37.4329788
+"area_m": 725044498.8447367,
+ "name": "Seoul, South Korea",
+ "xmax": 127.1828552,
+ "xmin": 126.7904879,
+ "ymax": 37.6911425,
+ "ymin": 37.4329788
   },
 
 
   "montreal": {
-
+"name": "Montreal, Urban agglomeration of Montreal, Montreal (06), Quebec, Canada",
+  "xmin": -73.9425579,
+  "ymin": 45.4152504,
+  "xmax": -73.4793798,
+  "ymax": 45.7017431,
+  "area_m": 616769221.068417
   },
 
 
   "london": {
-'area_m': 3684329.776672375,
-'name': 'City of London, Greater London, England, EC2V 5AE, United Kingdom',
-'xmax': -0.0733918,
-'xmin': -0.1138032,
-'ymax': 51.5231826,
-'ymin': 51.5083279
+"area_m": 3684329.776672375,
+"name": "City of London, Greater London, England, EC2V 5AE, United Kingdom",
+"xmax": -0.0733918,
+"xmin": -0.1138032,
+"ymax": 51.5231826,
+"ymin": 51.5083279
 },
 
 
   "paris": {
-'area_m': 99969784.78191853,
- 'name': 'Paris, France',
- 'xmax': 2.4162179,
- 'xmin': 2.2262498,
- 'ymax': 48.9019091,
- 'ymin': 48.8158728
+"area_m": 99969784.78191853,
+ "name": "Paris, France",
+ "xmax": 2.4162179,
+ "xmin": 2.2262498,
+ "ymax": 48.9019091,
+ "ymin": 48.8158728
   },
 
 
   "shanghai": {
-'area_m': 9998941697.289791,
- 'name': 'Shanghai, China',
- 'xmax': 121.9724096,
- 'xmin': 120.8619797,
- 'ymax': 31.8479288,
- 'ymin': 30.6986386
+"area_m": 9998941697.289791,
+ "name": "Shanghai, China",
+ "xmax": 121.9724096,
+ "xmin": 120.8619797,
+ "ymax": 31.8479288,
+ "ymin": 30.6986386
   },
 
 "amsterdam": {
-'area_m': 193321603.71183187,
- 'name': 'Amsterdam, North Holland, Netherlands, The Netherlands',
- 'xmax': 5.0309564,
- 'xmin': 4.7326118,
- 'ymax': 52.4283749,
- 'ymin': 52.3216547
+"area_m": 193321603.71183187,
+ "name": "Amsterdam, North Holland, Netherlands, The Netherlands",
+ "xmax": 5.0309564,
+ "xmin": 4.7326118,
+ "ymax": 52.4283749,
+ "ymin": 52.3216547
 },
 
-
   "berlin": {
-'area_m': 1114678640.4917703,
- 'name': 'Berlin, Germany',
- 'xmax': 13.7416683,
- 'xmin': 13.1078481,
- 'ymax': 52.6566512,
- 'ymin': 52.3422539
+"area_m": 1114678640.4917703,
+ "name": "Berlin, Germany",
+ "xmax": 13.7416683,
+ "xmin": 13.1078481,
+ "ymax": 52.6566512,
+ "ymin": 52.3422539
   },
 
 
   "rome": {
-'area_m': 1644155113.456669,
- 'name': 'Rome, Roma Capitale, Italy',
- 'xmax': 12.8080773,
- 'xmin': 12.2354255,
- 'ymax': 42.0978977,
- 'ymin': 41.6566121
+"area_m": 1644155113.456669,
+ "name": "Rome, Roma Capitale, Italy",
+ "xmax": 12.8080773,
+ "xmin": 12.2354255,
+ "ymax": 42.0978977,
+ "ymin": 41.6566121
   }
 }
