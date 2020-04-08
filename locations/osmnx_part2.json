@@ -1,0 +1,32 @@
+{
+
+  "boston": {
+"area_m": 180512020.08779275,
+ "name": "Boston, Suffolk County, Massachusetts, United States of America",
+ "xmax": -70.995568,
+ "xmin": -71.181895,
+ "ymax": 42.3946751,
+ "ymin": 42.2313976
+  },
+
+
+  "seoul": {
+"area_m": 725044498.8447367,
+ "name": "Seoul, South Korea",
+ "xmax": 127.1828552,
+ "xmin": 126.7904879,
+ "ymax": 37.6911425,
+ "ymin": 37.4329788
+  },
+
+
+  "montreal": {
+"name": "Montreal, Urban agglomeration of Montreal, Montreal (06), Quebec, Canada",
+  "xmin": -73.9425579,
+  "ymin": 45.4152504,
+  "xmax": -73.4793798,
+  "ymax": 45.7017431,
+  "area_m": 616769221.068417
+  }
+
+}

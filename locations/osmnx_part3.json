@@ -1,0 +1,32 @@
+{
+
+  "london": {
+"area_m": 3684329.776672375,
+"name": "City of London, Greater London, England, EC2V 5AE, United Kingdom",
+"xmax": -0.0733918,
+"xmin": -0.1138032,
+"ymax": 51.5231826,
+"ymin": 51.5083279
+},
+
+
+  "paris": {
+"area_m": 99969784.78191853,
+ "name": "Paris, France",
+ "xmax": 2.4162179,
+ "xmin": 2.2262498,
+ "ymax": 48.9019091,
+ "ymin": 48.8158728
+  },
+
+
+  "shanghai": {
+"area_m": 9998941697.289791,
+ "name": "Shanghai, China",
+ "xmax": 121.9724096,
+ "xmin": 120.8619797,
+ "ymax": 31.8479288,
+ "ymin": 30.6986386
+  }
+
+}

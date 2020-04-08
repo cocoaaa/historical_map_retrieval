@@ -1,0 +1,19 @@
+{
+
+  "la": {"area_m": 1595581267.7142398,
+ "name": "Los Angeles, Los Angeles County, California, United States of America",
+ "xmax": -118.155398,
+ "xmin": -118.6676334,
+ "ymax": 34.3350353,
+ "ymin": 33.8494973},
+
+
+  "vegas": {
+    "name": "Las Vegas, Clark County, Nevada, United States of America",
+    "area_m": 457877863.23560387,
+    "xmax": -115.0621786,
+    "xmin": -115.3777489,
+    "ymax": 36.3359959,
+    "ymin": 36.1295895
+  }
+}

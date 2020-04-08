@@ -1,0 +1,30 @@
+{
+  "charlotte": {
+  "name": "Charlotte, Mecklenburg County, North Carolina, United States of America",
+    "area_m": 1006599932.6032761,
+ "xmax": -80.6701329,
+ "xmin": -81.008391,
+ "ymax": 35.3922365,
+ "ymin": 35.0153162
+
+  },
+
+  "chicago": {
+"name": "Chicago, Cook County, Illinois, United States of America",
+ "xmin": -87.855433,
+ "ymin": 41.6459001,
+ "xmax": -87.5245029,
+ "ymax": 42.0227242,
+ "area_m": 754906349.5319687
+  },
+
+
+  "manhattan": {
+"area_m": 77003120.59389,
+ "name": "Manhattan, New York County, New York, United States of America",
+ "xmax": -73.9062697,
+ "xmin": -74.0180549,
+ "ymax": 40.878979,
+ "ymin": 40.7014943
+  }
+}

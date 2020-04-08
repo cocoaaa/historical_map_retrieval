@@ -1,0 +1,30 @@
+{
+
+"amsterdam": {
+"area_m": 193321603.71183187,
+ "name": "Amsterdam, North Holland, Netherlands, The Netherlands",
+ "xmax": 5.0309564,
+ "xmin": 4.7326118,
+ "ymax": 52.4283749,
+ "ymin": 52.3216547
+},
+
+  "berlin": {
+"area_m": 1114678640.4917703,
+ "name": "Berlin, Germany",
+ "xmax": 13.7416683,
+ "xmin": 13.1078481,
+ "ymax": 52.6566512,
+ "ymin": 52.3422539
+  },
+
+
+  "rome": {
+"area_m": 1644155113.456669,
+ "name": "Rome, Roma Capitale, Italy",
+ "xmax": 12.8080773,
+ "xmin": 12.2354255,
+ "ymax": 42.0978977,
+ "ymin": 41.6566121
+  }
+}
