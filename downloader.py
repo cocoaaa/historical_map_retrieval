@@ -177,8 +177,8 @@ def download_tiles_from_cities(locations_fn: str, tile_source_name: str, styles:
         xmin, xmax, ymin, ymax = geo['xmin'], geo['xmax'], geo['ymin'], geo['ymax']
         z = geo.get('z', 13)
         if overwrites is not None:
+            print(f"Overwriting z {z} -> {overwrites['z']}")
             z = overwrites["z"]
-            print(f"Overwriting z {geo['z']} -> {z}")
         # pdb.set_trace()
 
         print('=' * 80)
