@@ -174,7 +174,8 @@ def download_tiles_from_cities(locations_fn: str, tile_source_name: str, styles:
     for city, geo in tqdm.tqdm(city_geos.items(), desc='city-loop'):
         # if city in ['paris', 'khartoum']:
         #     continue
-        xmin, xmax, ymin, ymax, z = geo['xmin'], geo['xmax'], geo['ymin'], geo['ymax'], geo['z']
+        xmin, xmax, ymin, ymax = geo['xmin'], geo['xmax'], geo['ymin'], geo['ymax'], \
+        z = geo.get('z', 13)
         if overwrites is not None:
             z = overwrites["z"]
             print(f"Overwriting z {geo['z']} -> {z}")
