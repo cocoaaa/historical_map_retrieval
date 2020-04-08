@@ -17,6 +17,9 @@ if __name__ == "__main__":
     nohup python download_styles.py -b "./locations/vegas.json" -s "./selected_styles.json" -o "/data/hayley/maptiles"
     or, 
     nohup python download_styles.py -b "./locations/locations.json" -s "./styles/osm_styles.json" -o "/data/hayley/maptiles"
+    
+    To overwrite the zoom level in location.json file, pass the -z argument to CLI:
+    nohup python download_styles.py -b "./locations/paris.json" -s "./styles/selected_styles_all.json" -o "/data/hayley/maptiles" -z 12 &
 
     """
     # Argument parser
