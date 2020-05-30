@@ -27,6 +27,24 @@ def getGeoFromTile(x, y, zoom):
 	return lat_deg, lon_deg
 
 
+def deg2rad(x):
+	"""Convert the unit of x from degree to radian"""
+	return x * math.pi/180.0
+
+
+def getTileExtent(x, y, zoom):
+	"""Computes the horizontal and vertical distance covered by the tile
+    Ref: "Distance per pixel math" in https://wiki.openstreetmap.org/wiki/Zoom_levels
+    """
+	lat_deg, lon_deg = getGeoFromTile(x,y,zoom)
+	lat_rad, lon_rad = deg2rad(lat_deg), deg2rad(lon_deg)
+
+	C_km = 2*math.pi*6378137 # equatorial circumference of the Earth in km
+	size_y = C_km * math.cos(lat_rad)/2**zoom
+	size_x = C_km * math.cos(lon_rad)/2**zoom
+	return size_y, size_x
+
+
 if __name__ == "__main__":
 	print(getGeoFromTile(32628, 20880, 16))
 	print(getGeoFromTile(32628, 20881, 16))
