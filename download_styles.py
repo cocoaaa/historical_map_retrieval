@@ -20,7 +20,7 @@ if __name__ == "__main__":
     
     To overwrite the zoom level in location.json file, pass the -z argument to CLI:
     nohup python download_styles.py -b "./locations/paris.json" -s "./styles/selected_styles_all.json" -o "/data/hayley/maptiles" -z 12 &
-
+nohup python download_styles.py -b "./locations/osmnx_part4.json" -s "./styles/selected_styles_all.json" -o "/data/hayley/maptiles_v2/" -z 13
     """
     # Argument parser
     parser = argparse.ArgumentParser()
